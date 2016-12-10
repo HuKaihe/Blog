@@ -1,0 +1,41 @@
+<div class="page-header">
+    <h2>用户注册</h2>
+</div>
+<div class="login-box">
+    <form class="form-horizontal" action="register" method="post">
+        <div class="form-group">
+            <label for="inputEmail" class="col-sm-3 control-label">用户邮箱</label>
+            <div class="col-sm-9">
+                <input class="form-control" id="inputEmail" placeholder="Email" name="email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail" class="col-sm-3 control-label">用户昵称</label>
+            <div class="col-sm-9">
+                <input class="form-control" id="inputEmail" placeholder="nickName" name="nickName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-sm-3 control-label">口令</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control" id="inputPassword" placeholder="password" name="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPasswordEnsure" class="col-sm-3 control-label">重复输入口令</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control" id="inputPasswordEnsure" placeholder="Ensure your Password" name="password_repeat">
+            </div>
+        </div>
+        <div class="col-sm-offset-3 error-info">
+            {{error_info}}
+        </div>
+
+        <div class="form-group" style="margin-top: 50px">
+            <div class="col-sm-offset-4">
+                <button type="submit" class="btn btn-primary" style="margin-right: 50px">注册</button>
+                <button type="reset" class="btn btn-danger">重置</button>
+            </div>
+        </div>
+    </form>
+</div>

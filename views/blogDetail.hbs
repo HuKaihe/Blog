@@ -1,0 +1,69 @@
+<div class="user-home-layout-left">
+    <div class="thumbnail">
+        <img src="images/user-icon.jpg"/>
+        <div class="caption">
+            <h3>{{user.nickName}}的微博</h3>
+            <p class="text-center">凡事包容，凡事相信，凡事盼望，凡事忍耐</p>
+        </div>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item active">
+            他的最新博客
+        </li>
+        <li class="list-group-item">
+            <span class="badge">2369</span>
+            Nodejs web开发
+        </li>
+        <li class="list-group-item">
+            <span class="badge">3667</span>
+            MongoDB的使用与配置
+        </li>
+        <li class="list-group-item">
+            <span class="badge">5696</span>
+            细说浮动
+        </li>
+        <li class="list-group-item">
+            <span class="badge">5696</span>
+            大话react native
+        </li>
+        <li class="list-group-item">
+            <span class="badge">1696</span>
+            事件绑定
+        </li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-danger">
+            他的热门博客
+        </li>
+        <li class="list-group-item">
+            <span class="badge">2369</span>
+            Nodejs web开发
+        </li>
+        <li class="list-group-item">
+            <span class="badge">3667</span>
+            MongoDB的使用与配置
+        </li>
+        <li class="list-group-item">
+            <span class="badge">5696</span>
+            细说浮动
+        </li>
+        <li class="list-group-item">
+            <span class="badge">5696</span>
+            大话react native
+        </li>
+        <li class="list-group-item">
+            <span class="badge">1696</span>
+            事件绑定
+        </li>
+    </ul>
+</div>
+<div class="blog-detail-layout-right">
+    <h1 class="blog-title">{{blog.title}}</h1>
+    <div class="blog-info">
+        <div class="publishingDate">发表日期:{{blog.dateStr}}</div>
+        <div class="author">作者：{{blog.author.nickName}}</div>
+    </div>
+    <div>
+        {{{blog.content}}}
+    </div>
+</div>

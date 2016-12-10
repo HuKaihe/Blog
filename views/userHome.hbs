@@ -1,0 +1,132 @@
+<div class="user-home-layout-left">
+    <div class="thumbnail">
+        <img src="images/user-icon.jpg"/>
+        <div class="caption">
+            <h3>{{user.nickName}}的微博</h3>
+            <p class="text-center">凡事包容，凡事相信，凡事盼望，凡事忍耐</p>
+        </div>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item active">
+            他的最新博客
+        </li>
+        <li class="list-group-item">
+            <span class="badge">2369</span>
+            Nodejs web开发
+        </li>
+        <li class="list-group-item">
+            <span class="badge">3667</span>
+            MongoDB的使用与配置
+        </li>
+        <li class="list-group-item">
+            <span class="badge">5696</span>
+            细说浮动
+        </li>
+        <li class="list-group-item">
+            <span class="badge">5696</span>
+            大话react native
+        </li>
+        <li class="list-group-item">
+            <span class="badge">1696</span>
+            事件绑定
+        </li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-danger">
+            他的热门博客
+        </li>
+        <li class="list-group-item">
+            <span class="badge">2369</span>
+            Nodejs web开发
+        </li>
+        <li class="list-group-item">
+            <span class="badge">3667</span>
+            MongoDB的使用与配置
+        </li>
+        <li class="list-group-item">
+            <span class="badge">5696</span>
+            细说浮动
+        </li>
+        <li class="list-group-item">
+            <span class="badge">5696</span>
+            大话react native
+        </li>
+        <li class="list-group-item">
+            <span class="badge">1696</span>
+            事件绑定
+        </li>
+    </ul>
+</div>
+<div class="user-home-layout-right">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav user-operating-list">
+                    <li><a href="/blog/newBlog"><span class="fa fa-pencil-square-o"></span>&nbsp;&nbsp;&nbsp;新的博客</a></li>
+                    <li><a href="#"><span class="fa fa-signal"></span>&nbsp;&nbsp;&nbsp;统计</a></li>
+                    <li class="dropdown" style="float: right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cogs"></span>&nbsp;&nbsp;&nbsp;设置
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><span class="fa fa-cogs"></span>&nbsp;&nbsp;&nbsp;评论设置</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><span class="fa fa-cogs"></span>&nbsp;&nbsp;&nbsp;皮肤设置</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <table id="blog-table" class="table  table-responsive table-hover">
+        <thead>
+        <tr>
+            <td class="blog-title">博客名称</td>
+            <td class="blog-introduction">博客简介</td>
+            <td>发表时间</td>
+            <td class="blog-operation">编辑博客</td>
+            <td class="blog-operation">删除博客</td>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each blogs}}
+            <tr>
+                <td>{{title}}</td>
+                <td>{{introduction}}</td>
+                <td>{{dateStr}}</td>
+                <td>
+                    <a type="button" class="btn btn-default" href="/blog/editBlog/{{_id}}">
+                        <span class="fa fa-pencil"></span>
+                    </a>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default delete_blog" id="{{_id}}">
+                        <span class="fa fa-trash"></span>
+                    </button>
+                </td>
+            </tr>
+        {{/each}}
+
+        </tbody>
+    </table>
+    <nav style="text-align: center">
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </nav>
+</div>
+<script>
+    $('.delete_blog').click(function () {
+        var blog_id = $(this).prop('id');
+        layer.confirm('你确定要删除这篇博客吗？',{btn:['是的','我再考虑一下']},function () {
+            location.href = '/blog/deleteBlog/' + blog_id;
+        },function () {
+            layer.closeAll();
+        })
+    });
+</script>

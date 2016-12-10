@@ -1,0 +1,207 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-family: "Microsoft YaHei" !important;
+}
+
+a {
+    color: #00B7FF;
+    cursor: pointer;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+.carousel img {
+    width: 100%;
+}
+
+.carousel-control {
+    padding-top: 200px;
+}
+
+.carousel-caption {
+    text-align: center;
+}
+
+#carousel-example-generic {
+    margin-top: 20px;
+}
+
+.hot-blog-list {
+    list-style: none;
+    padding: 0;
+}
+
+.hot-blog-list > li {
+    position: relative;
+    overflow: hidden;
+    padding: 10px 0;
+    margin-top: 10px;
+    border-bottom: 2px dashed gray;
+}
+
+.hot-blog-list > li:last-child {
+    border-bottom: none;
+}
+
+.hot-blog-list > li .blog-header {
+    font-size: 17px;
+    margin-bottom: 15px;
+}
+
+.hot-blog-list > li .blog-body {
+    padding-left: 15px;
+}
+
+.blog-interaction {
+    float: right;
+}
+
+.blog-interaction > li {
+    display: inline-block;
+    height: 30px;
+}
+
+.support {
+    float: right;
+    margin-left: 10px;
+    height: 30px;
+    font-size: 15px;
+}
+
+.support:hover {
+    margin-left: 8px;
+    font-size: 17px;
+    margin-top: -2px;
+}
+
+.more-blog {
+    text-align: center;
+    color: #2e6da4;
+    margin-top: 20px;
+}
+
+.login-box {
+    padding: 10px;
+    width: 800px;
+}
+
+.error-info {
+    height: 30px;
+    color: red;
+}
+
+.user-home-layout-left{
+    float: left;
+    overflow: hidden;
+    width: 200px;
+}
+.user-home-layout-right{
+    overflow: hidden;
+    padding: 15px;
+    min-height: 1000px;
+}
+.user-operating-list{
+    width: 100%;
+    min-width: 800px;
+}
+#blog-table thead td{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+}
+#blog-table tbody td{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 13px;
+}
+#blog-table .blog-title{
+    width: 200px;
+}
+#blog-table .blog-introduction{
+    width: 500px;
+}
+#blog-table .blog-operation{
+    width: 75px;
+}
+.publish{
+    margin-left: 15px;
+}
+.blog-tools{
+    background-color: #EDEDED;
+    height: 40px;
+    padding: 0 20px;
+    margin-bottom: 0;
+    line-height: 40px;
+}
+.blog-tools li{
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 17px;
+}
+.blog-edit-area{
+    float: left;
+    width: 50%;
+    min-height: 1000px;
+    padding: 10px;
+    resize: none;
+}
+.blog-exhibition-area{
+    overflow: hidden;
+    min-height: 1000px;
+}
+.drag-control{
+    float: left;
+    width: 1%;
+    min-height: 1000px;
+    line-height: 1000px;
+    background-color: #EDEDED;
+    cursor: ew-resize;
+}
+.new-blog-block .new-blog-title,.new-blog-block .new-blog-introduction{
+    margin-bottom: 10px;
+}
+.new-blog-block .new-blog-introduction{
+    height: 150px;
+    resize: none;
+    padding: 10px;
+}
+#file_upload{
+    display: inline-block;
+    margin-bottom: 25px;
+}
+#file_upload input{
+    float: right;
+}
+.upload,.delete-pic{
+    float: right;
+    margin-right: 10px;
+}
+#exec_target{
+    border: none;
+    width: 100%;
+    min-height: 200px;
+}
+/*博客详情页*/
+.blog-detail-layout-right{
+    padding-left: 45px;
+    margin-top: 10px;
+    overflow: hidden;
+    min-height: 1000px;
+}
+.blog-detail-layout-right .blog-title{
+    color: orangered;
+}
+.blog-detail-layout-right .blog-info{
+    overflow: hidden;
+    margin: 35px 0;
+    font-size: 14px;
+    color: #5e5e5e;
+}
+.blog-detail-layout-right .blog-info div{
+    float: right;
+    margin-left: 50px;
+}

@@ -1,0 +1,64 @@
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="images/system/scroll1.jpg"/>
+            <div class="carousel-caption">
+                前端与移动端的伟大握手
+            </div>
+        </div>
+        <div class="item">
+            <img src="images/system/scroll2.jpg"/>
+            <div class="carousel-caption">
+                前后端破冰之旅
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+    </a>
+</div>
+<div class="page-header">
+    <h1>欢迎来到HKH博客
+        <small>Bootstrap + Nodejs +Mongodb</small>
+    </h1>
+</div>
+<ul class="hot-blog-list">
+    {{#each hotBlogs}}
+        <li class="blog">
+            <a href="/blog/blogDetail/{{_id}}"><div class="blog-header">{{title}}</div></a>
+            <div class="blog-body">
+                {{{introduction}}}
+            </div>
+            <ul class="blog-interaction">
+                <li>阅读量：<span class="badge">{{readingQuantity}}</span></li>
+                <li>点赞数：<span class="badge">0</span><a class="support" href="javascript:void(0)"><span
+                        class="fa fa-thumbs-o-up"></span></a></li>
+            </ul>
+        </li>
+    {{/each}}
+
+</ul>
+{{#if end}}
+    <div class="more-blog">
+        <a href="javascript:void(0)">目前已无更多博客</a>
+    </div>
+    {{else}}
+    <div class="more-blog">
+        <a href="/?blog_amount={{blog_amount}}">加载更多热门博客</a>
+    </div>
+{{/if}}
+{{#if bottom}}
+    <script>
+        window.scrollTo(0,document.body.scrollHeight);
+    </script>
+{{/if}}
+

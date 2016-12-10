@@ -1,0 +1,170 @@
+<form id="blog_form">
+    <nav class="navbar navbar-default" style="margin-top: 10px">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    新的博客
+                </div>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button class="btn btn-success navbar-btn save"><span class="fa fa-save"></span>&nbsp;&nbsp;&nbsp;保存草稿
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary navbar-btn publish"><span
+                                class="fa fa-check-square-o"></span>&nbsp;&nbsp;&nbsp;{{#if blog}}确定更改{{else}}发表博客{{/if}}
+                        </button>
+                        <input name="_id" type="hidden" value="{{blog._id}}">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="new-blog-block">
+        <input name="blog_title" class="new-blog-title form-control" placeholder="博客题目" {{#if blog.title}}
+               value="{{blog.title}}"{{/if}}>
+        <textarea name="blog_introduction" class="new-blog-introduction form-control" placeholder="博客简介">{{#if blog.introduction}}{{blog.introduction}}{{/if}}</textarea>
+        <ul class="blog-tools">
+            <li><a data-toggle="modal" data-target="#fileUploadModel"><span
+                    class="fa fa-image"></span></a></li>
+            <li><a href="javascript:void(0)"><span class="fa fa-bold"></span></a></li>
+            <li><a href="javascript:void(0)"><span class="fa fa-upload"></span></a></li>
+            <li><a href="javascript:void(0)"><span class="fa fa-download"></span></a></li>
+            <li><a href="javascript:void(0)"><span class="fa fa-code"></span></a></li>
+        </ul>
+        <textarea name="blog_content" class="blog-edit-area">{{#if blog.content}}{{blog.content}}{{else}}##新的博客{{/if}}</textarea>
+        <div class="drag-control">
+            <span class="fa fa-text-width" style="color: #5e5e5e"></span>
+        </div>
+        <div class="blog-exhibition-area"></div>
+    </div>
+</form>
+<div id="fileUploadModel" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">图片上传</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="imgUploadForm" method="post" action="/blog/upload" target="exec_target"
+                      enctype="multipart/form-data">
+                    <input type="file" name="upload_file" id="file_upload">
+                    <button type="button" class="upload btn btn-primary">确定上传</button>
+                </form>
+
+                <iframe id="exec_target" name="exec_target"></iframe>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+    (function () {
+
+        $('.publish').click(function () {
+            var blogData = $('#blog_form').serialize();
+            $.post('/blog/publishNewBlog', blogData, function (data) {
+                if (data == "success") {
+                    layer.confirm('发表成功',
+                            {
+                                btn: ['继续写博客', '返回用户首页']
+                            },
+                            function () {
+                                location.href = '/blog/newBlog'
+                            },
+                            function () {
+                                location.href = '/userHome'
+                            })
+                }
+            });
+        });
+
+        var html_content = markdown.toHTML($(".blog-edit-area").val());
+        $(".blog-exhibition-area").html(html_content);
+
+        $(".blog-edit-area").on('keyup', function () {
+            var html_content = markdown.toHTML($(this).val());
+            $(".blog-exhibition-area").html(html_content);
+        });
+
+        var dragging = 0;
+
+        $(".new-blog-block").on("mousedown", ".drag-control", function () {
+            dragging = 1;
+            $(this).attr("onselectstart", "javascript:return false;");
+        }).on("mousemove", function () {
+            if (dragging == 1) {
+                var $leftPanel = $(".blog-edit-area"),
+                        $rightPanel = $(".blog-exhibition-area"),
+                        rightPanelX = $rightPanel[0].offsetLeft,
+                        mouseX = event.clientX,
+                        dist = mouseX - rightPanelX,
+                        leftPanelWidth = parseInt($leftPanel.width()),
+                        rightPanelWidth = parseInt($rightPanel.width());
+
+                if (leftPanelWidth + dist > 50) {
+                    $leftPanel.css("width", leftPanelWidth + dist);
+                    if (rightPanelWidth < 200) {
+                        $leftPanel.css("width", leftPanelWidth);
+                    }
+                }
+            }
+        }).on("mouseleave", function () {
+            dragging = 0;
+        });
+
+        $("body").on("mouseup", function () {
+            dragging = 0;
+        });
+
+        // 图片上传与下载
+        var $fileUpload = $('#file_upload'),
+                $imgUploadForm = $('#imgUploadForm'),
+                $imgFrame = $('#exec_target'),
+                $upload = $('.upload');
+
+
+        $upload.click(function () {
+            if($fileUpload.val()){
+                $imgUploadForm.submit();
+                $imgFrame.on('load',function () {
+                    var $deleteBtn = $('<button type="button" class="delete-pic btn btn-danger">删除图片</button>');
+
+                    $deleteBtn.appendTo($imgUploadForm );
+                    $upload.addClass('disabled');
+                    $fileUpload.addClass('disabled');
+                    $imgUploadForm.unbind('load');
+                });
+            }else{
+                layer.alert("请选择要上传的图片");
+            }
+        });
+
+
+        $imgUploadForm.on('click', '.delete-pic', function () {
+
+            var picname = $imgFrame.contents().find('img').data('picname');
+
+            layer.confirm("你确定要删除吗?",function () {
+                $.post('/blog/deletePic',{picname:picname},function () {
+                    layer.alert('删除成功');
+                    $upload.removeClass('disabled');
+                    $imgFrame.remove();
+                    $('<iframe id="exec_target" name="exec_target"></iframe>').appendTo($('.modal-body'));
+                    $fileUpload.val('');
+                    $('.delete-pic').remove();
+                    layer.closeAll();
+                });
+            })
+        });
+    })()
+</script>
